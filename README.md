@@ -1,9 +1,9 @@
 # display_gigaset_openstage_sl4
- Arduino test sketch for Gigaset OpenStage SL4 Display
+## Arduino test sketch for Gigaset OpenStage SL4 Display
 
 
-Pinout:
-
+#### Pinout:
+```
 1  = +4,7V BG LED
 
 2  = Control BG LED
@@ -23,3 +23,4 @@ Pinout:
 9  = GND
 
 10 = VDD (+2,8V)
+```
