@@ -1,4 +1,4 @@
-# display_gigaset_openstage_sl4
+# Gigaset OpenStage SL4 Display
 ## Arduino test sketch for Gigaset OpenStage SL4 Display
 
 
