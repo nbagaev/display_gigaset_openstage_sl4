@@ -51,7 +51,7 @@ void setup()
   pinMode(pin_sda, OUTPUT);
   pinMode(pin_resx, OUTPUT);
   pinMode(pin_scx, OUTPUT);
-  pinMode(pin_dcx,OUTPUT);
+  pinMode(pin_dcx, OUTPUT);
   //init 
   digitalWrite(pin_resx, HIGH);
   digitalWrite(pin_scl, LOW);
