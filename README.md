@@ -1,7 +1,7 @@
 # Gigaset OpenStage SL4 Display
 ## Arduino test sketch for Gigaset OpenStage SL4 Display
 ### Labeled as: WD-F1216YU-6FLWa
-### Controller like ILI9163, ST7735? 
+### Controller similar to ILI9163? 
 #### Pinout:
 ```
 1  = +4,7V BG LED
