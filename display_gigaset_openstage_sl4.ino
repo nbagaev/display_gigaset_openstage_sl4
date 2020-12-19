@@ -122,7 +122,9 @@ void setup()
    
   send_command(set_display_on);
   delay(180);
-  //send_command(read_display_status); answer:0xF0,0x29,0x82,0x00
+  //send_command(read_display_status);
+  //dummy clock cycle
+  //answer:0xF0,0x29,0x82,0x00
 
   send_command(set_page_address);
   send_data(0x00);  send_data(0x00);//0
