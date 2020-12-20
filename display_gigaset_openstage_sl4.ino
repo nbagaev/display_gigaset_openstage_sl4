@@ -22,11 +22,12 @@
 #define write_memory_start        0x2C //Memory Write
 #define nop                       0x00 //No Operation
 
-uint8_t pin_scl = 7;  //serial clock
-uint8_t pin_sda = 6;  //data input
-uint8_t pin_dcx = 5;  //data/command
-uint8_t pin_resx = 4; //reset
-uint8_t pin_scx = 8;  //chip enable
+uint8_t pin_scl = 13;  //serial clock
+uint8_t pin_sda = 11;  //data input
+uint8_t pin_scx = 10;  //chip enable
+uint8_t pin_dcx = 9;  //data/command
+uint8_t pin_resx = 8; //reset
+
 
 const uint8_t gamma_plus[] PROGMEM = {0x02,0x0B,0x16,0x2D,0x2B,0x13,0x15,0x06,0x06,0x04,0x0C,0x0C,0x01,0x05,0x03,0x07};
 const uint8_t gamma_minus[] PROGMEM = {0x04,0x1C,0x1E,0x25,0x18,0x11,0x06,0x15,0x07,0x04,0x05,0x01,0x0C,0x0C,0x04,0x06};
@@ -131,17 +132,52 @@ void setup()
   send_data(0x00);  send_data(0x9F);//159
   
   send_command(write_memory_start);
-  //fill display white
-  for(int i = 0; i < 20480; i++)//128*160
-  {
-    send_data(0xFF); send_data(0xFF);
-  }
   //fill display black
   for(int i = 0; i < 20480; i++)//128*160
   {
     send_data(0x00); send_data(0x00);
   }
+  
+  //print char A
+  const uint8_t a[] = {0x18, 0x24, 0x42, 0x81, 0xFF, 0x81, 0x81, 0x81};
+  /*  
+  00011000
+  00100100
+  01000010  
+  10000001
+  11111111
+  10000001
+  10000001
+  10000001
+  */
+  uint8_t line;
 
+  send_command(set_column_address);
+  send_data(0x00);  send_data(0x00);//0
+  send_data(0x00);  send_data(0x07);//7
+  
+  send_command(set_page_address);
+  send_data(0x00);  send_data(0x00);//0
+  send_data(0x00);  send_data(0x07);//7
+  
+  send_command(write_memory_start);
+  
+  for(uint8_t i = 0; i < 8; i++)
+  {
+    line = a[i];
+    for(uint8_t j = 0; j < 8; j++)
+    {
+      if((line & 0x80) == 0x80)
+      {
+        send_data(0xFF); send_data(0xFF);        
+      }
+      else
+      {
+        send_data(0x00); send_data(0x00);
+      }
+      line <<= 1;
+    }    
+  }
   send_command(nop);
 }
 

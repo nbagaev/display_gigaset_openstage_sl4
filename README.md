@@ -24,3 +24,5 @@
 
 10 = VDD (+2,8V)
 ```
+![display_gigaset_openstage_sl4_back.jpg](display_gigaset_openstage_sl4_back.jpg)
+![display_gigaset_openstage_sl4_front.jpg](display_gigaset_openstage_sl4_front.jpg)
