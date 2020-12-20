@@ -22,7 +22,7 @@
 #define write_memory_start        0x2C //Memory Write
 #define nop                       0x00 //No Operation
 
-uint8_t pin_scx = 10;  //chip enable
+uint8_t pin_scx = 10; //chip enable
 uint8_t pin_dcx = 9;  //data/command
 uint8_t pin_resx = 8; //reset
 
