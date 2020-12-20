@@ -22,8 +22,6 @@
 #define write_memory_start        0x2C //Memory Write
 #define nop                       0x00 //No Operation
 
-uint8_t pin_scl = 13;  //serial clock
-uint8_t pin_sda = 11;  //data input
 uint8_t pin_scx = 10;  //chip enable
 uint8_t pin_dcx = 9;  //data/command
 uint8_t pin_resx = 8; //reset
@@ -46,16 +44,11 @@ void send_command(uint8_t bits)
 
 void setup()
 {
-  pinMode(pin_scl, OUTPUT);
-  pinMode(pin_sda, OUTPUT);
-  pinMode(pin_resx, OUTPUT);
   pinMode(pin_scx, OUTPUT);
+  pinMode(pin_resx, OUTPUT); 
   pinMode(pin_dcx, OUTPUT);
   //init 
   digitalWrite(pin_resx, HIGH);
-  //digitalWrite(pin_scl, LOW);
-  //digitalWrite(pin_sda, HIGH);
-  //digitalWrite(pin_scx, LOW);
   digitalWrite(pin_dcx, LOW);
   //reset 
   digitalWrite(pin_resx, LOW);
@@ -134,11 +127,6 @@ void setup()
   send_data(0x00);  send_data(0x9F);//159
   
   send_command(write_memory_start);
-    //fill display white
-  for(int i = 0; i < 20480; i++)//128*160
-  {
-    send_data(0x00); send_data(0xFF);
-  }
   //fill display black
   for(int i = 0; i < 20480; i++)//128*160
   {
