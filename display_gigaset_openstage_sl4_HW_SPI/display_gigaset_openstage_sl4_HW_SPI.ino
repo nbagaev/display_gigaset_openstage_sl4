@@ -44,12 +44,11 @@ void send_command(uint8_t bits)
 
 void setup()
 {
+  //init
   pinMode(pin_scx, OUTPUT);
   pinMode(pin_resx, OUTPUT); 
-  pinMode(pin_dcx, OUTPUT);
-  //init 
+  pinMode(pin_dcx, OUTPUT);   
   digitalWrite(pin_resx, HIGH);
-  digitalWrite(pin_dcx, LOW);
   //reset 
   digitalWrite(pin_resx, LOW);
   delay(1679);
