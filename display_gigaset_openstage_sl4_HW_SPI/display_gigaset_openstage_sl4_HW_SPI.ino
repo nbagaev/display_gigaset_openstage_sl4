@@ -1,6 +1,6 @@
 //Arduino test sketch for Gigaset OpenStage SL4 Display
 //Assuming the display controller is ILI9163
-
+#include <SPI.h>
 #define exit_sleep_mode           0x11 //Sleep Out
 #define enter_normal_mode         0x13 //Normal Display Mode On
 #define exit_invert_mode          0x20 //Display inversion off
@@ -35,15 +35,13 @@ const uint8_t gamma_minus[] PROGMEM = {0x04,0x1C,0x1E,0x25,0x18,0x11,0x06,0x15,0
 void send_data(uint8_t bits)
 {
   digitalWrite(pin_dcx, HIGH);//set D/C HIGH = data
-  shiftOut(pin_sda, pin_scl, MSBFIRST, bits);//send data bits    
+  SPI.transfer(bits);//send data bits   
   digitalWrite(pin_dcx, LOW);//set D/C LOW = command
-  digitalWrite(pin_sda, HIGH);
 }
 
 void send_command(uint8_t bits)
 {
-  shiftOut(pin_sda, pin_scl, MSBFIRST, bits);//send command bits
-  digitalWrite(pin_sda, HIGH);
+  SPI.transfer(bits);//send data bits 
 }
 
 void setup()
@@ -55,15 +53,19 @@ void setup()
   pinMode(pin_dcx, OUTPUT);
   //init 
   digitalWrite(pin_resx, HIGH);
-  digitalWrite(pin_scl, LOW);
-  digitalWrite(pin_sda, HIGH);
-  digitalWrite(pin_scx, LOW);
+  //digitalWrite(pin_scl, LOW);
+  //digitalWrite(pin_sda, HIGH);
+  //digitalWrite(pin_scx, LOW);
   digitalWrite(pin_dcx, LOW);
   //reset 
   digitalWrite(pin_resx, LOW);
   delay(1679);
   digitalWrite(pin_resx, HIGH);
-  delay(120);  
+  delay(120); 
+   
+  SPI.begin();
+  SPI.beginTransaction(SPISettings(8000000, MSBFIRST, SPI_MODE0));
+  
   send_command(exit_sleep_mode);
   delay(5);
   send_command(enter_normal_mode);
@@ -132,6 +134,11 @@ void setup()
   send_data(0x00);  send_data(0x9F);//159
   
   send_command(write_memory_start);
+    //fill display white
+  for(int i = 0; i < 20480; i++)//128*160
+  {
+    send_data(0x00); send_data(0xFF);
+  }
   //fill display black
   for(int i = 0; i < 20480; i++)//128*160
   {
@@ -179,6 +186,8 @@ void setup()
     }    
   }
   send_command(nop);
+  SPI.endTransaction();
+  SPI.end();
 }
 
 void loop()
