@@ -5,7 +5,7 @@
 ### works with https://github.com/Bodmer/TFT_ILI9163
 #### Pinout:
 ```
-1  = +4,7V BG LED
+1  = +4,7V BG LED (21mA)
 
 2  = Control BG LED (PWM 2,5V)
 
