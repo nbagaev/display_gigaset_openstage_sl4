@@ -5,7 +5,7 @@
 ### works with https://github.com/olikraus/ucglib
 #### Pinout:
 ```
-1  = +4,7V BG LED (21mA)
+1  = +3V BG LED (20mA)
 
 2  = LED GND
 
