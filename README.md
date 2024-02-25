@@ -1,7 +1,7 @@
 # Gigaset OpenStage SL4 Display
 ## Arduino test sketch for Gigaset OpenStage SL4 Display
 ### Labeled as: WD-F1216YU-6FLWa
-### Controller similar to ST7735
+### Controller similar to ST7735 and ILI9163V
 
 Clock Frequency ~10MHz(write cycle 96 ns)
 

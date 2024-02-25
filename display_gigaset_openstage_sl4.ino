@@ -1,5 +1,5 @@
 //Arduino test sketch for Gigaset OpenStage SL4 Display
-//Assuming the display controller is ILI9163
+//Assuming the display controller is ILI9163V
 
 #define exit_sleep_mode           0x11 //Sleep Out
 #define enter_normal_mode         0x13 //Normal Display Mode On
