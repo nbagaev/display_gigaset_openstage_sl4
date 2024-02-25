@@ -20,7 +20,6 @@
 #define set_display_on            0x29 //Display On
 #define read_display_status       0x09 //Read Display Status
 #define write_memory_start        0x2C //Memory Write
-#define nop                       0x00 //No Operation
 
 uint8_t pin_scl = 13;  //serial clock
 uint8_t pin_sda = 11;  //data input
@@ -125,7 +124,7 @@ void setup()
   delay(180);
   //send_command(read_display_status);
   //dummy clock cycle
-  //answer:0xF0,0x29,0x82,0x00
+  //answer:0xE0,0x53,0x04,0x00
 
   send_command(set_page_address);
   send_data(0x00);  send_data(0x00);//0
@@ -178,7 +177,6 @@ void setup()
       line <<= 1;
     }    
   }
-  send_command(nop);
 }
 
 void loop()
