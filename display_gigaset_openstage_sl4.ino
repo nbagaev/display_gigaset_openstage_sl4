@@ -21,6 +21,13 @@
 #define read_display_status       0x09 //Read Display Status
 #define write_memory_start        0x2C //Memory Write
 
+//some colors 16bit RRRRRGGG GGGBBBBB
+#define  BLUE     0x001F 
+#define  GREEN    0x07E0 
+#define  RED      0xF800 
+#define  WHITE    0xFFFF
+#define  BLACK    0x0000
+
 uint8_t pin_scl = 13;  //serial clock
 uint8_t pin_sda = 11;  //data input
 uint8_t pin_scx = 10;  //chip enable
@@ -60,9 +67,9 @@ void setup()
   digitalWrite(pin_dcx, LOW);
   //reset 
   digitalWrite(pin_resx, LOW);
-  delay(1679);
+  delay(1);
   digitalWrite(pin_resx, HIGH);
-  delay(120);  
+  delay(500);  
   send_command(exit_sleep_mode);
   delay(5);
   send_command(enter_normal_mode);
@@ -134,7 +141,7 @@ void setup()
   //fill display black
   for(int i = 0; i < 20480; i++)//128*160
   {
-    send_data(0x00); send_data(0x00);
+    send_data(BLACK>>8); send_data(BLACK);//
   }
   
   //print char A
